@@ -8,11 +8,24 @@ const bodyParser = require('body-parser');
 
 const productRoutes = require('./api/routes/products');
 const orderRoutes = require('./api/routes/orders');
+const mongoose = require('mongoose');
+
+//MongoDB Setup
+
+mongoose.connect('mongodb+srv://stobon:' + 
+                    process.env.MONGO_ATLAS_PW + 
+                    '@cluster0.lztg3.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+                    {
+                        useNewUrlParser: true,
+                        useUnifiedTopology: true
+                    }
+);
+
 //Sets up middleware, incoming requests go through app.use().
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-
+app.use('/uploads', express.static('uploads'));
 
 //Handle CORS
 app.use((req, res, next) => {

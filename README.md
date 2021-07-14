@@ -1,1 +1,1 @@
-# RESTFUL-API-WORKSHOP
+# A RESTful Shop API
